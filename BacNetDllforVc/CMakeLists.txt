@@ -127,7 +127,6 @@ set(HANDLER_FILES
   ${C_DIR_HANDLER}/h_pt.c
   ${C_DIR_HANDLER}/h_pt_a.c
   ${C_DIR_HANDLER}/h_rd.c
-  ${C_DIR_HANDLER}/h_routed_npdu.c
   ${C_DIR_HANDLER}/h_rp.c
   ${C_DIR_HANDLER}/h_rpm.c
   ${C_DIR_HANDLER}/h_rpm_a.c
@@ -191,8 +190,7 @@ set(OBJECT_FILES
   ${C_DIR_OBJECT}/bo.c
   ${C_DIR_OBJECT}/bv.c
   ${C_DIR_OBJECT}/csv.c
-  ${C_DIR_OBJECT}/device.c
-  ${C_DIR_OBJECT}/gw_device.c
+  ${C_DIR_OBJECT}/device.c  
   ${C_DIR_OBJECT}/lc.c
   ${C_DIR_OBJECT}/lo.c
   ${C_DIR_OBJECT}/lsp.c
