@@ -29,6 +29,10 @@ set(PROJECT_NAME ISP)
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_RELEASE Build/${CMAKE_BUILD_TYPE})
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # Folders files
 set(CPP_SOURCE_DIR ./)
 set(CPP_HEADER_DIR ./)
@@ -195,4 +199,5 @@ add_executable(${PROJECT_NAME}
 )
 
 # Link with other dependencies.
-# target_link_libraries(${PROJECT_NAME} None None )
+target_link_libraries(${PROJECT_NAME} ../Build/${CMAKE_BUILD_TYPE}/BACnetStackLibrary
+../Build/${CMAKE_BUILD_TYPE}/ModbusDllforVc)

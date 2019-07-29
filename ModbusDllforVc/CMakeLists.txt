@@ -30,6 +30,10 @@ set(PROJECT_NAME ModbusDllforVc)
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # Folders files
 set(MODBUSDLLFORVC_SOURCE ./)
 set(MODBUSDLLFORVC_HEADER ./)
@@ -127,6 +131,8 @@ set(RESOURCE_FILES
 set_source_files_properties(${RES_DIRECTORY}/ModbusDllforVc.rc  PROPERTIES LANGUAGE RC)
 set_source_files_properties(${RES_DIRECTORY}/ModbusDllforVc.rc2 PROPERTIES LANGUAGE RC)
 set(CMAKE_RC_FLAGS "${CMAKE_RC_FLAGS} -i ../")
+
+include_directories(${MODBUSDLLFORVC_HEADER})
 
 # Add library to build.
 add_library(${PROJECT_NAME} SHARED

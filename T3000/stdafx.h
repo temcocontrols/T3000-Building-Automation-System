@@ -92,7 +92,7 @@ using namespace Gdiplus;
 #pragma comment(lib,"ModbusDllforVc")
 #pragma comment(lib,"FlexSlideBar")
 //#pragma comment(lib,"ISP")
-#pragma comment(lib,"BACnet_Stack_Library" )
+#pragma comment(lib,"BACnetStackLibrary" )
 
 INPUT int write_multi_Short(unsigned char device_var,unsigned short *to_write,unsigned short start_address,int length);
 

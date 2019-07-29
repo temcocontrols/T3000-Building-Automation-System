@@ -30,6 +30,10 @@ set(PROJECT_NAME T3000)
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
 # Folders files
 set(ISP_SOURCE_DIR ../ISP)
 set(BADO_SOURCE_DIR ./BADO)
@@ -819,5 +823,8 @@ if(MSVC)
 
 if(MSVC)
    #link_directories(${SQLITE_HEADER_DIR})
-   target_link_libraries(${PROJECT_NAME} setupapi.lib)
+   target_link_libraries(${PROJECT_NAME} setupapi.lib 
+   ../Build/${CMAKE_BUILD_TYPE}/ModbusDllforVc 
+   ../Build/${CMAKE_BUILD_TYPE}/FlexSlideBar
+   ../Build/${CMAKE_BUILD_TYPE}/BACnetStackLibrary)   
 endif(MSVC)

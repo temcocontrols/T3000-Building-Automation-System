@@ -142,6 +142,8 @@ set_source_files_properties(${RES_DIRECTORY}/FlexSlideBar.rc PROPERTIES LANGUAGE
 set_source_files_properties(${RES_DIRECTORY}/FlexSlideBar.rc2 PROPERTIES LANGUAGE RC)
 set(CMAKE_RC_FLAGS "${CMAKE_RC_FLAGS} -i ../")
 
+include_directories(${CPP_HEADER_DIR})
+
 # Add library to build.
 add_library(${PROJECT_NAME} SHARED
    ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES}
