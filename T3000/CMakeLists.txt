@@ -80,10 +80,14 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 # Definition of Macros
 add_definitions(
-   -D_DEBUG 
+   -DWIN32 
+   -D_WINDOWS
    -DUNICODE
    -D_UNICODE
 )
+
+# Link to MFC. 1 for static, 2 for shared.
+set(CMAKE_MFC_FLAG 1)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-D_DEBUG)
@@ -112,6 +116,7 @@ endif()
 if(MSVC)
    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /W3 /MTd /EHsc /wd4190 /wd4091 /wd4018")
    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT /W3 /EHsc /wd4190 /wd4091 /wd4018")
+   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 endif(MSVC)
 if(NOT MSVC)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -281,6 +286,8 @@ set(CLASSCTRL_SOURCE_FILES
   ${CLASSCTRL_SOURCE_DIR}/md5.h
   ${CLASSCTRL_SOURCE_DIR}/MulitithreadSocket.cpp
   ${CLASSCTRL_SOURCE_DIR}/MulitithreadSocket.h
+  ${CLASSCTRL_SOURCE_DIR}/MyPing.cpp
+  ${CLASSCTRL_SOURCE_DIR}/MyPing.h
 )
 
 set (BACNET_HEADER_FILES
@@ -818,7 +825,7 @@ add_executable(${PROJECT_NAME} WIN32
 
 if(MSVC)
      SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS "/Yustdafx.h")
-     set_source_files_properties(stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")
+     set_source_files_properties(stdafx.cpp PROPERTIES COMPILE_FLAGS "/Ycstdafx.h")	 
   endif(MSVC)
 
 if(MSVC)
@@ -826,5 +833,9 @@ if(MSVC)
    target_link_libraries(${PROJECT_NAME} setupapi.lib 
    ../Build/${CMAKE_BUILD_TYPE}/ModbusDllforVc 
    ../Build/${CMAKE_BUILD_TYPE}/FlexSlideBar
-   ../Build/${CMAKE_BUILD_TYPE}/BACnetStackLibrary)   
+   ../Build/${CMAKE_BUILD_TYPE}/BACnetStackLibrary
+   ../Build/${CMAKE_BUILD_TYPE}/MultipleMonthCal32)
+   target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/../SQLiteDriver/sqlite3.lib)
+   add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD COMMAND ${CMAKE_COMMAND} -E copy_if_different 
+   ${CMAKE_CURRENT_SOURCE_DIR}/../SQLiteDriver/sqlite3.dll ${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE})
 endif(MSVC)
