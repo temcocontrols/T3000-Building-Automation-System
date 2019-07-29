@@ -62,6 +62,9 @@ add_definitions(
    -D_UNICODE
 )
 
+# Link to MFC. 1 for static, 2 for shared.
+set(CMAKE_MFC_FLAG 1)
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-D_DEBUG)
 else()
@@ -109,6 +112,7 @@ if(MSVC)
    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /W3 /EHsc")
    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 endif(MSVC)
 if(NOT MSVC)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -116,6 +120,9 @@ if(NOT MSVC)
        set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
    endif()
 endif(NOT MSVC)
+
+# Include directories 
+include_directories(${CPP_HEADER_DIR})
 
 ################ Files ################
 #   --   Add files to project.   --   #
@@ -142,6 +149,7 @@ set(SOURCE_FILES
   ${CPP_SOURCE_DIR}/TFTPServer.cpp
   ${CPP_SOURCE_DIR}/TstatFlashDlg.cpp
   ${CPP_SOURCE_DIR}/BADO/BADO.cpp
+  ${CPP_SOURCE_DIR}/StaticEx/staticex.cpp
 )
 
 set(HEADER_FILES
@@ -170,6 +178,8 @@ set(HEADER_FILES
   ${CPP_HEADER_DIR}/TFTPServer.h
   ${CPP_HEADER_DIR}/TstatFlashDlg.h
   ${CPP_HEADER_DIR}/BADO/BADO.h
+  ${CPP_HEADER_DIR}/StaticEx/staticex.h
+  ${CPP_HEADER_DIR}/StaticEx/logfont.h
   ${EXTERNAL_HEADER_DIR_BACNET_MAIN}/rs485.h
   ${EXTERNAL_HEADER_DIR_BACNET_INCLUDE}/mstp.h
   ${EXTERNAL_HEADER_DIR_BACNET_OBJECT}/trendlog.h

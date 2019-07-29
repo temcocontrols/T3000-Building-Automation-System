@@ -47,6 +47,7 @@ set(MODBUSPOLL_SOURCE_DIR ./)
 set(MODBUSPOLL_HEADER_DIR ./)
 set(CURRENT_DIR ./)
 set(RES_DIRECTORY ./Resources)
+set(EXTERNAL_DIR_SQLITEDRIVER ../SQLiteDriver)
 
 ############## CMake Project ################
 #        The main options of project        #
@@ -66,6 +67,9 @@ add_definitions(
    -DUNICODE
    -D_UNICODE
 )
+
+# Link to MFC. 1 for static, 2 for shared.
+set(CMAKE_MFC_FLAG 1)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
   add_definitions(-D_DEBUG)
@@ -96,6 +100,7 @@ if(MSVC)
    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /W3 /EHsc")
    set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /MT")
    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MTd")
+   set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS")
 endif(MSVC)
 if(NOT MSVC)
    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
@@ -289,6 +294,7 @@ set(MODBUSPOLL_SOURCES
   ${MODBUSPOLL_SOURCE_DIR}/WriteSingleCoilDlg.cpp
   ${MODBUSPOLL_SOURCE_DIR}/WriteSingleRegisterDlg.cpp
   ${MODBUSPOLL_SOURCE_DIR}/WriteSingle_BinaryDlg.cpp
+  ${EXTERNAL_DIR_SQLITEDRIVER}/CppSQLite3.cpp
 )
 
 set(MODBUSPOLL_HEADERS
@@ -384,6 +390,7 @@ set(MODBUSPOLL_HEADERS
   ${MODBUSPOLL_HEADER_DIR}/WriteSingleCoilDlg.h
   ${MODBUSPOLL_HEADER_DIR}/WriteSingleRegisterDlg.h
   ${MODBUSPOLL_HEADER_DIR}/WriteSingle_BinaryDlg.h
+  ${EXTERNAL_DIR_SQLITEDRIVER}/CppSQLite3.h
 )
 
 set(RESOURCE_FILES
@@ -404,5 +411,6 @@ add_executable(${PROJECT_NAME}
    ${MODBUSPOLL_SOURCES} ${MODBUSPOLL_HEADERS} ${RESOURCE_FILES} 
 )
 
+target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/../SQLiteDriver/sqlite3.lib)
 target_link_libraries(${PROJECT_NAME} setupapi.lib ../Build/${CMAKE_BUILD_TYPE}/ModbusDllforVc)
 
