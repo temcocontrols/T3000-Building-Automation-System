@@ -14,10 +14,10 @@ With this reboot, we are moving to a CMake based build system. This simplifies t
 7. ...
 
 The following gives a quick overview of how to create a build. First download the latest CMake https://cmake.org/ tool for windows. Then checkout this repository. Navigate to the folder in the visual studio developer command prompt. Then issue the following commands:
-  mkdir build
-  cd build
-  cmake -G "Visual Studio 14 2015" ..
-  cmake --build .
+  - mkdir build
+  - cd build
+  - cmake -G "Visual Studio 14 2015" ..
+  - cmake --build . --config Release
 
 If you dislike command prompts, please refer to the excellet article here to do it visually
 (https://preshing.com/20170511/how-to-build-a-cmake-based-project/)
