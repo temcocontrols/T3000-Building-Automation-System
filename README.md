@@ -19,9 +19,10 @@ The following gives a quick overview of how to create a build. First download th
   - cmake -G "Visual Studio 14 2015" ..
   - cmake --build . --config Release
 
-If you dislike command prompts, please refer to the excellet article here to do it visually
-(https://preshing.com/20170511/how-to-build-a-cmake-based-project/)
+Once the build completes, you will find the T3000 executable in build\bin\Release folder.
 
+If you dislike command prompts, please refer to :
+![T3000-Building-Automation-System](./CMakeGUISteps.md "CMake GUI guide")
 
 
 
