@@ -21,8 +21,7 @@ The following gives a quick overview of how to create a build. First download th
 
 Once the build completes, you will find the T3000 executable in build\bin\Release folder.
 
-If you dislike command prompts, please refer to :
-![T3000-Building-Automation-System](./CMakeGUISteps.md "CMake GUI guide")
+If you dislike command prompts, please refer here [Building through CMake GUI](./CMakeGUISteps.md "CMake GUI guide")
 
 
 
