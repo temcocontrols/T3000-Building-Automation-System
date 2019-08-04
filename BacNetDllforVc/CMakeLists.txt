@@ -30,10 +30,6 @@ set(PROJECT_NAME BACnetStackLibrary)
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 # Folders files
 set(C_DIR_HANDLER ./Handler)
 set(C_DIR_MAIN ./MainCpp)
@@ -75,16 +71,7 @@ endif()
 ############## Artefacts Output #################
 # Defines outputs , depending Debug or Release. #
 #################################################
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-else()
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-endif()
+# Already defined in the main CMakeLists.txt at root.
 
 # Include directories 
 include_directories(./)

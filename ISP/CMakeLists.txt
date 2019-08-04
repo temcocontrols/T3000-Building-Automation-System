@@ -17,6 +17,7 @@
 # IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR 
 # IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+# We support CMake starting at version 3.0.0
 cmake_minimum_required(VERSION 3.0.0 FATAL_ERROR)
 
 ################### Variables. ####################
@@ -28,10 +29,6 @@ set(PROJECT_NAME ISP)
 # Output Variables
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_RELEASE Build/${CMAKE_BUILD_TYPE})
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Folders files
 set(CPP_SOURCE_DIR ./)
@@ -74,34 +71,8 @@ endif()
 ############## Artefacts Output #################
 # Defines outputs , depending Debug or Release. #
 #################################################
+# Already defined in the main CMakeLists.txt at root.
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-else()
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-endif()
-
-################### Dependencies ##################
-# Add Dependencies to project.                    #
-###################################################
-
-option(BUILD_DEPENDS 
-   "Build other CMake project." 
-   ON 
-)
-
-# Dependencies : disable BUILD_DEPENDS to link with lib already build.
-# if(BUILD_DEPENDS)
-   # add_subdirectory(platform/cmake/None ${CMAKE_BINARY_DIR}/None)
-   # add_subdirectory(platform/cmake/None ${CMAKE_BINARY_DIR}/None)
-# else()
-   # link_directories(dependencies/None/build/)
-   # link_directories(dependencies/None/build/)
-# endif()
 
 ################# Flags ################
 # Defines Flags for Windows and Linux. #
@@ -208,6 +179,11 @@ add_executable(${PROJECT_NAME}
    ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES}
 )
 
+# This program requires admin previleges to run.
+SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES LINK_FLAGS "/level='requireAdministrator' /uiAccess='false'")
+
+add_dependencies(${PROJECT_NAME} BACnetStackLibrary ModbusDllforVc)
 # Link with other dependencies.
-target_link_libraries(${PROJECT_NAME} ../Build/${CMAKE_BUILD_TYPE}/BACnetStackLibrary
-../Build/${CMAKE_BUILD_TYPE}/ModbusDllforVc)
+target_link_libraries(${PROJECT_NAME} ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE}/BACnetStackLibrary.lib
+  ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE}/ModbusDllforVc.lib)
+  

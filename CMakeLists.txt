@@ -26,13 +26,13 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 # Output Variables
-set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
-set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
+#set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
+#set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
 
 add_subdirectory(BacNetDllforVc)
 add_subdirectory(FlexSlideBar)
-add_subdirectory(ISP)
 add_subdirectory(ModbusDllforVc)
-add_subdirectory(ModbusPoll)
 add_subdirectory(MultipleMonthCal32)
+add_subdirectory(ModbusPoll)
+add_subdirectory(ISP)
 add_subdirectory(T3000)

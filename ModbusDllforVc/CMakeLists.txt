@@ -30,10 +30,6 @@ set(PROJECT_NAME ModbusDllforVc)
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 # Folders files
 set(MODBUSDLLFORVC_SOURCE ./)
 set(MODBUSDLLFORVC_HEADER ./)
@@ -68,16 +64,7 @@ endif()
 ############## Artefacts Output #################
 # Defines outputs , depending Debug or Release. #
 #################################################
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-else()
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-endif()
+# Already defined in the main CMakeLists.txt at root.
 
 ################# Flags ################
 # Defines Flags for Windows and Linux. #
@@ -138,4 +125,3 @@ include_directories(${MODBUSDLLFORVC_HEADER})
 add_library(${PROJECT_NAME} SHARED
    ${SOURCE_FILES} ${HEADER_FILES} ${RESOURCE_FILES}
 )
-

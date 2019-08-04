@@ -30,10 +30,6 @@ set(PROJECT_NAME ModbusPoll)
 set(OUTPUT_DEBUG Build/${CMAKE_BUILD_TYPE})
 set(OUTPUT_REL Build/${CMAKE_BUILD_TYPE})
 
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-
 # Folders files
 set(CHARTCTRL_SOURCE_DIR ./ChartCtrl)
 set(CHARTCTRL_HEADER_DIR ./ChartCtrl)
@@ -80,16 +76,7 @@ endif()
 ############## Artefacts Output #################
 # Defines outputs , depending Debug or Release. #
 #################################################
-
-if(CMAKE_BUILD_TYPE STREQUAL "Debug")
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_DEBUG}")
-else()
-  set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-  set(CMAKE_EXECUTABLE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/${OUTPUT_REL}")
-endif()
+# Already defined in the main CMakeLists.txt at root.
 
 ################# Flags ################
 # Defines Flags for Windows and Linux. #
@@ -411,6 +398,6 @@ add_executable(${PROJECT_NAME}
    ${MODBUSPOLL_SOURCES} ${MODBUSPOLL_HEADERS} ${RESOURCE_FILES} 
 )
 
+add_dependencies(${PROJECT_NAME} ModbusDllforVc)
 target_link_libraries(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/../SQLiteDriver/sqlite3.lib)
-target_link_libraries(${PROJECT_NAME} setupapi.lib ../Build/${CMAKE_BUILD_TYPE}/ModbusDllforVc)
-
+target_link_libraries(${PROJECT_NAME} setupapi.lib ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE}/ModbusDllforVc.lib)
