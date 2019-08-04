@@ -16,12 +16,16 @@ With this reboot, we are moving to a CMake based build system. This simplifies t
 The following gives a quick overview of how to create a build. First download the latest CMake https://cmake.org/ tool for windows. Then checkout this repository. Navigate to the folder in the visual studio developer command prompt. Then issue the following commands:
   - mkdir build
   - cd build
-  - cmake -G "Visual Studio 14 2015" ..
+  - cmake -DCMAKE_BUILD_TYPE=Release -G "Visual Studio 14 2015" ..
   - cmake --build . --config Release
 
-Once the build completes, you will find the T3000 executable in build\bin\Release folder.
+Once the build completes, you will find the T3000 executable in build\bin\Release folder. 
 
-If you dislike command prompts, please refer here [Building through CMake GUI](./CMakeGUISteps.md "CMake GUI guide")
+---
+***Notes***
+1. If you want a Debug build, just substitute Release with Debug in the last two commands. Results would then be in build\bin\Debug folder.
+2. If you dislike command prompts, please refer here [Building through CMake GUI](./CMakeGUISteps.md "CMake GUI guide")
+---
 
 
 
