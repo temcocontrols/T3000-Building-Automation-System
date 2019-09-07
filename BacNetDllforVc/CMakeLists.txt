@@ -47,7 +47,7 @@ project(${PROJECT_NAME} C CXX)
 
 # Define Release by default.
 if(NOT CMAKE_BUILD_TYPE)
-  set(CMAKE_BUILD_TYPE "Release")
+  set(CMAKE_BUILD_TYPE $(Configuration))
   message(STATUS "Build type not specified: Uses Release by default.")
 endif(NOT CMAKE_BUILD_TYPE)
 
