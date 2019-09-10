@@ -114,12 +114,12 @@ csharp_set_designer_cs_properties(
 )
 
 set_property(TARGET ${project} PROPERTY VS_DOTNET_TARGET_FRAMEWORK_VERSION "v4.0.0")
-set_property(TARGET ${project} PROPERTY WIN32_EXECUTABLE FALSE)
-set(CMAKE_CSharp_FLAGS "/langversion:6")
+set_property(TARGET ${project} PROPERTY WIN32_EXECUTABLE TRUE)
+set(CMAKE_CSharp_FLAGS "/langversion:latest")
 
 set(OUT_DIR ${CMAKE_ARCHIVE_OUTPUT_DIRECTORY}/${CMAKE_BUILD_TYPE})
 
-set_property(TARGET ${project} PROPERTY VS_DOTNET_REFERENCES
+set_property(TARGET T3000Controls PROPERTY VS_DOTNET_REFERENCES
     "Microsoft.CSharp"
     "System"
     "System.Core"
